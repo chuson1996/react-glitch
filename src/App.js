@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import GlitchImg from './react-glitch';
+import GlitchImg from '../lib/react-glitch';
 
 class App extends Component {
   constructor(props) {

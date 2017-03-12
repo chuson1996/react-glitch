@@ -35,7 +35,8 @@ var config = {
       commonjs2: 'react',
       commonjs: 'react',
       amd: 'react'
-    }
+    },
+    'glitch-canvas': 'glitch-canvas'
   },
 };
 

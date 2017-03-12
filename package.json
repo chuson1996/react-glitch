@@ -46,7 +46,6 @@
     "whatwg-fetch": "2.0.2"
   },
   "dependencies": {
-    "glitch-canvas": "^1.0.2",
     "lodash": "^4.17.4",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
@@ -89,5 +88,8 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "peerDependencies": {
+    "glitch-canvas": "^1.0.2"
   }
 }

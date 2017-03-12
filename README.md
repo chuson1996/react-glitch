@@ -2,9 +2,11 @@
 
 Glitch images. This modules is based on https://github.com/snorpey/glitch-canvas
 
+**Note: Install glitch-canvas as it is a peer dependency of react-glitch. I can't bundle glitch-canvas into react-glitch for some problem.**
+
 [Demo](https://chuson1996.github.io/react-glitch/)
 
-Install: `npm install --save react-glitch`
+Install: `npm install --save glitch-canvas react-glitch`
 
 Example: 
 ```javascript
