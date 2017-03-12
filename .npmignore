@@ -1,5 +1,8 @@
 scripts/
-src/
+src/assets
+src/App.js
+src/index.js
+src/index.css
 config/
 public/
 static/
