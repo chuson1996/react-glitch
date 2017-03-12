@@ -1,6 +1,6 @@
 {
   "name": "react-glitch",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "http://chuson1996.github.io/react-glitch",
   "main": "lib/react-glitch.js",
   "devDependencies": {
