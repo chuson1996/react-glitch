@@ -16,15 +16,15 @@ export default class GlitchImg extends Component {
       seed: 0,
       quality: 99,
       amount: 0,
-      iterations: [1, 5, 10]
+      iterations: [1, 5, 10],
     },
-    speed: [10, 10, 1000]
+    speed: [10, 10, 1000],
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      outputImgSrc: null
+      outputImgSrc: null,
     };
 
     this.cachedGlitchImages = {};
@@ -42,17 +42,19 @@ export default class GlitchImg extends Component {
   }
 
   preload = () => {
-    Promise.all(this.variations.map((option) =>
-      glitch(option)
-        .fromImage(this._img)
-        .toDataURL()
-        .then((dataUrl) => ({ dataUrl, option }))
-    )).then((data) => {
+    Promise.all(
+      this.variations.map(option =>
+        glitch(option)
+          .fromImage(this._img)
+          .toDataURL()
+          .then(dataUrl => ({ dataUrl, option })),
+      ),
+    ).then(data => {
       data.forEach(({ dataUrl, option }) => {
         this.cachedGlitchImages[JSON.stringify(option)] = dataUrl;
       });
-    })
-  }
+    });
+  };
 
   componentWillUnmount() {
     clearTimeout(this.timeout);
@@ -67,7 +69,7 @@ export default class GlitchImg extends Component {
     }
   }
 
-  getGlitchVariation = (options) => {
+  getGlitchVariation = options => {
     const { glitchOptions } = this.props;
     const _options = options || glitchOptions;
     let result = [];
@@ -75,17 +77,19 @@ export default class GlitchImg extends Component {
     for (const key of Object.keys(_options)) {
       if (Array.isArray(_options[key])) {
         for (const val of _options[key]) {
-          result = [...result, ...this.getGlitchVariation({
-            ..._options,
-            [key]: val
-          })];
-        };
+          result = [
+            ...result,
+            ...this.getGlitchVariation({
+              ..._options,
+              [key]: val,
+            }),
+          ];
+        }
         return result;
-      }
-      else {
+      } else {
         item[key] = _options[key];
       }
-    };
+    }
     return [...result, item];
   };
 
@@ -100,20 +104,20 @@ export default class GlitchImg extends Component {
 
   glitch = () => {
     const newGlitchProps = sample(this.variations);
-    console.log('glitch');
+
     if (this.cachedGlitchImages[JSON.stringify(newGlitchProps)]) {
       this.setState({
-        outputImgSrc: this.cachedGlitchImages[JSON.stringify(newGlitchProps)]
+        outputImgSrc: this.cachedGlitchImages[JSON.stringify(newGlitchProps)],
       });
       return Promise.resolve();
     }
     return glitch(newGlitchProps)
       .fromImage(this._img)
       .toDataURL()
-      .then((dataUrl) => {
+      .then(dataUrl => {
         this.cachedGlitchImages[JSON.stringify(newGlitchProps)] = dataUrl;
         this.setState({
-          outputImgSrc: dataUrl
+          outputImgSrc: dataUrl,
         });
       });
   };
@@ -122,10 +126,10 @@ export default class GlitchImg extends Component {
     const { outputImgSrc } = this.state;
     const { src, glitching, glitchOptions, speed, ...others } = this.props;
 
-    return (
-      (outputImgSrc && glitching) ?
-        <img src={outputImgSrc} {...others} alt=""/> :
-        <img src={src} {...others} alt=""/>
+    return outputImgSrc && glitching ? (
+      <img src={outputImgSrc} {...others} alt="" />
+    ) : (
+      <img src={src} {...others} alt="" />
     );
   }
 }
